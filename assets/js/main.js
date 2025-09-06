@@ -37,7 +37,7 @@ console.log("hanging polyfill");
 
   if (supported) return; // natywne wsparcie, nic nie robimy
 
-  document.querySelectorAll(".single-content p").forEach(p => {
+  document.querySelectorAll("body.post-template .single-content p").forEach(p => {
     // bierzemy HTML akapitu i rozbijamy po <br>
     const parts = p.innerHTML.split(/<br\s*\/?>/i);
 
