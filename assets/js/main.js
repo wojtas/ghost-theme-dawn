@@ -27,3 +27,24 @@ function featured() {
         },
     });
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  // test wsparcia dla 'hanging each-line'
+console.log("hanging polyfill");
+  const test = document.createElement("p");
+  test.style.textIndent = "1em hanging each-line";
+  const supported = test.style.textIndent.includes("hanging");
+
+  if (supported) return; // natywne wsparcie, nic nie robimy
+
+  document.querySelectorAll(".single-content p").forEach(p => {
+    // bierzemy HTML akapitu i rozbijamy po <br>
+    const parts = p.innerHTML.split(/<br\s*\/?>/i);
+
+    if (parts.length > 1) {
+      const spans = parts.map(txt => `<span class="seg">${txt.trim()}</span>`);
+      p.classList.add("hang-polyfill");
+      p.innerHTML = spans.join("");
+    }
+  });
+});
